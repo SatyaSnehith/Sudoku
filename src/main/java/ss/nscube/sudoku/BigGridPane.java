@@ -4,11 +4,13 @@ import javafx.scene.input.KeyCode;
 import ss.nscube.sudoku.controls.SEButton;
 import ss.nscube.sudoku.controls.STilePane;
 import ss.nscube.sudoku.utils.ControlUiUtil;
+import ss.nscube.sudoku.utils.Sudoku;
 import ss.nscube.sudoku.utils.SudokuUtil;
 
 public class BigGridPane extends STilePane {
     public int[][] sudoku;
     public int[][] unfilled;
+    public int[][] answer;
     public SEButton[][] button;
     STilePane[][] gridPane;
     KeyCode[] numPad = new KeyCode[10];
@@ -55,7 +57,9 @@ public class BigGridPane extends STilePane {
         numberStage.setOnCloseRequest(event -> {this.requestFocus();});
     }
 
-    public void update(int[][] s) {
+    public void update(Sudoku sdk) {
+        int[][] s = sdk.getSudoku();
+        answer = sdk.getAnswer();
         for(int i = 0; i < 9; ++i) {
             for (int j = 0; j < 9; ++j) {
                 int num = s[i][j];
@@ -159,6 +163,7 @@ public class BigGridPane extends STilePane {
         for(int i = 0; i < 9; ++i) {
             for (int j = 0; j < 9; ++j) {
                 if(sudoku[i][j] != 0) {
+                    button[i][j].wrong(sudoku[i][j] != answer[i][j]);
                     if (!(i == x && j == y) && sudoku[i][j] == num) button[i][j].hint();
                     else button[i][j].normal();
                 } else {
@@ -175,7 +180,6 @@ public class BigGridPane extends STilePane {
                 if (x != i+xFrom || j+yFrom != y) button[i+xFrom][j+yFrom].hint(); else button[i+xFrom][j+yFrom].normal();
             }
         button[x][y].select();
-
     }
 
     @Override

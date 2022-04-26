@@ -8,7 +8,7 @@ import ss.nscube.sudoku.theme.Theme;
 public class SEButton extends Button implements StyleUpdater {
     Style[] style = null;
     boolean isEditable = true;
-//    boolean isCorrect = true;
+    boolean isWrong = false;
     String currentStyle;
 
     public SEButton(String text) {
@@ -19,7 +19,8 @@ public class SEButton extends Button implements StyleUpdater {
     }
 
     public void select() {
-        updateStyle(Theme.SELECT_E_BUTTON_STYLE);
+        if (isWrong) updateStyle(Theme.WRONG_SELECT_E_BUTTON_STYLE);
+        else updateStyle(Theme.SELECT_E_BUTTON_STYLE);
     }
 
     public void disable() {
@@ -32,6 +33,10 @@ public class SEButton extends Button implements StyleUpdater {
         updateStyle(Theme.E_BUTTON_STYLE);
     }
 
+    public void wrong(Boolean isWrong) {
+        this.isWrong = isWrong;
+    }
+
 //    public void isCorrect(boolean correct) {
 //        isCorrect = correct;
 //        if (isCorrect) {
@@ -42,11 +47,15 @@ public class SEButton extends Button implements StyleUpdater {
 //    }
 
     public void hint() {
-        updateStyle(Theme.HINT_E_BUTTON_STYLE);
+        if (isWrong) updateStyle(Theme.WRONG_E_BUTTON_STYLE);
+        else updateStyle(Theme.HINT_E_BUTTON_STYLE);
     }
 
     public void normal() {
-        if (isEditable) blank();
+        if (isEditable) {
+            if (isWrong) updateStyle(Theme.WRONG_E_BUTTON_STYLE);
+            else blank();
+        }
         else disable();
     }
 

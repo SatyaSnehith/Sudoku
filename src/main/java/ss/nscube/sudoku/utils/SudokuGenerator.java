@@ -91,8 +91,8 @@ public class SudokuGenerator {
             }
     }
 
-    public int[][] getSudoku() {
-        return s;
+    public Sudoku getSudoku() {
+        return new Sudoku(s, filled);
     }
 
     public void createSudokuWithUniqueSolution() {

@@ -27,7 +27,10 @@ public class Theme {
     public static final String WRONG_E_BUTTON_STYLE = "wrongEButtonStyle";
     public static Style[] wrongEButtonStyle = new Style[themeCount];
 
-    public static final String SELECT_E_BUTTON_STYLE = "SelectEButtonStyle";
+    public static final String WRONG_SELECT_E_BUTTON_STYLE = "wrongSelectEButtonStyle";
+    public static Style[] wrongSelectEButtonStyle = new Style[themeCount];
+
+    public static final String SELECT_E_BUTTON_STYLE = "selectEButtonStyle";
     public static Style[] selectEButtonStyle = new Style[themeCount];
 
     public static final String HINT_E_BUTTON_STYLE = "hintEButtonStyle";
@@ -90,6 +93,7 @@ public class Theme {
         styleMap.put(UNSELECT_BUTTON_STYLE, unselectButtonStyle);
         styleMap.put(E_BUTTON_STYLE, eButtonStyle);
         styleMap.put(WRONG_E_BUTTON_STYLE, wrongEButtonStyle);
+        styleMap.put(WRONG_SELECT_E_BUTTON_STYLE, wrongSelectEButtonStyle);
         styleMap.put(SELECT_E_BUTTON_STYLE, selectEButtonStyle);
         styleMap.put(HINT_E_BUTTON_STYLE, hintEButtonStyle);
         styleMap.put(DISABLE_E_BUTTON_STYLE, disableEButtonStyle);
@@ -121,6 +125,11 @@ public class Theme {
         wrongEButtonStyle[0] = new Style(LIGHT_RED, GREY_700, null, RED_100, 1);
         //dark theme
         wrongEButtonStyle[1] = new Style(DARK_RED, GREY_400, null, RED_900, 1);
+
+        //light theme
+        wrongSelectEButtonStyle[0] = new Style(LIGHT_RED, GREY_700, null, GREY_900, 2);
+        //dark theme
+        wrongSelectEButtonStyle[1] = new Style(DARK_RED, GREY_400, null, GREY_400, 2);
 
         //light theme
         disableEButtonStyle[0] = new Style(GREY_200, GREY_600, null, GREY_88, 1);

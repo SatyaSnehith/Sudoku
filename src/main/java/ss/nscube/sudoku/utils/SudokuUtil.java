@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Arrays;
 
 public class SudokuUtil {
-    public static int[][] generateSudoku() {
+    public static Sudoku generateSudoku() {
         return (new SudokuGenerator()).getSudoku();
     }
 
@@ -22,14 +22,12 @@ public class SudokuUtil {
                 }
         if (x == -1) return true;
         boolean solved = false;
-        int solvedWith = -1;
         for (int i = 1; i <= 9; ++i) {
             if (isEligible(i, s, x, y)) {
                 s[x][y] = i;
                 if (solve(cloneSudoku(s))) {
                     if (solved) return false;
                     solved = true;
-                    solvedWith = i;
                 }
                 if (!hasUniqueSolution(cloneSudoku(s))) return false;
             }
