@@ -10,3 +10,7 @@ Sudoku application in JavaFX
 
 ### Built With
 - JavaFX
+
+### Screenshots
+<img src="https://github.com/SatyaSnehith/Sudoku/blob/master/screenshots/ScreenshotDark.png" width="750">
+<img src="https://github.com/SatyaSnehith/Sudoku/blob/master/screenshots/ScreenshotLight.png" width="750">
