@@ -2,7 +2,6 @@ package ss.nscube.sudoku.theme;
 
 import javafx.scene.text.Font;
 import ss.nscube.sudoku.SudokuApplication;
-import ss.nscube.sudoku.utils.MatColors;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -17,6 +16,8 @@ public class Theme {
 
     public static final String BUTTON_STYLE = "buttonStyle";
     public static Style[] buttonStyle = new Style[themeCount];
+
+    public static Style[] timerLabelStyle = new Style[themeCount];
 
     public static final String UNSELECT_BUTTON_STYLE = "unselectButtonStyle";
     public static Style[] unselectButtonStyle = new Style[themeCount];
@@ -59,7 +60,8 @@ public class Theme {
     static final String GREY_40 = "#404040";
     static final String GREY_DD = "#DDDDDD";
     static final String GREY_AA = "#DDDDDD";
-    static final String GREY_88 = "#888888";
+    static final String LIGHT_BORDER = "#888888";
+    static final String DARK_BORDER = "#999999";
     static final String DARK_GREEN = "#29341C";
     static final String LIGHT_GREEN = "#CEE4B4";
     static final String DARK_RED = "#710505";
@@ -107,6 +109,11 @@ public class Theme {
         buttonStyle[1] = new Style(DARK_GREEN, LIGHT, null, null, null);
 
         //light theme
+        timerLabelStyle[0] = new Style(TRANSPARENT, DARK, null, null, null);
+        //dark theme
+        timerLabelStyle[1] = new Style(TRANSPARENT, LIGHT, null, null, null);
+
+        //light theme
         transparentStyle[0] = new Style(TRANSPARENT, null, null, null, null);
         //dark theme
         transparentStyle[1] = new Style(TRANSPARENT, null, null, null, null);
@@ -117,14 +124,14 @@ public class Theme {
         unselectButtonStyle[1] = new Style(UNSELECTED_DARK, LIGHT, 10, null, null);
 
         //light theme
-        eButtonStyle[0] = new Style(GREY_200, GREY_900, null, GREY_88, 1);
+        eButtonStyle[0] = new Style(GREY_200, GREY_900, null, LIGHT_BORDER, 1);
         //dark theme
-        eButtonStyle[1] = new Style(GREY_900, GREY_200, null, GREY_88, 1);
+        eButtonStyle[1] = new Style(GREY_900, GREY_200, null, DARK_BORDER, 1);
 
         //light theme
-        wrongEButtonStyle[0] = new Style(LIGHT_RED, GREY_700, null, GREY_88, 1);
+        wrongEButtonStyle[0] = new Style(LIGHT_RED, GREY_700, null, LIGHT_BORDER, 1);
         //dark theme
-        wrongEButtonStyle[1] = new Style(DARK_RED, GREY_400, null, GREY_88, 1);
+        wrongEButtonStyle[1] = new Style(DARK_RED, GREY_400, null, DARK_BORDER, 1);
 
         //light theme
         wrongSelectEButtonStyle[0] = new Style(LIGHT_RED, GREY_700, null, GREY_900, 2);
@@ -132,9 +139,9 @@ public class Theme {
         wrongSelectEButtonStyle[1] = new Style(DARK_RED, GREY_400, null, GREY_400, 2);
 
         //light theme
-        disableEButtonStyle[0] = new Style(GREY_200, GREY_600, null, GREY_88, 1);
+        disableEButtonStyle[0] = new Style(GREY_200, GREY_600, null, LIGHT_BORDER, 1);
         //dark theme
-        disableEButtonStyle[1] = new Style(GREY_900, GREY_400, null, GREY_88, 1);
+        disableEButtonStyle[1] = new Style(GREY_900, GREY_400, null, DARK_BORDER, 1);
 
         //light theme
         selectEButtonStyle[0] = new Style(LIGHT_GREEN, BLACK, null, GREY_900, 2);
@@ -142,9 +149,9 @@ public class Theme {
         selectEButtonStyle[1] = new Style(DARK_GREEN, WHITE, null, GREY_400, 2);
 
         //light theme
-        hintEButtonStyle[0] = new Style(LIGHT_GREEN, GREY_900, null, GREY_88, 1);
+        hintEButtonStyle[0] = new Style(LIGHT_GREEN, GREY_900, null, LIGHT_BORDER, 1);
         //dark theme
-        hintEButtonStyle[1] = new Style(DARK_GREEN, GREY_200, null, GREY_88, 1);
+        hintEButtonStyle[1] = new Style(DARK_GREEN, GREY_200, null, DARK_BORDER, 1);
 
 
         //light theme

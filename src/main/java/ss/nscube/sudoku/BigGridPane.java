@@ -11,24 +11,29 @@ public class BigGridPane extends STilePane {
     public int[][] sudoku;
     public int[][] unfilled;
     public int[][] answer;
-    public SEButton[][] button;
+    public SEButton[][] buttons;
     STilePane[][] gridPane;
     KeyCode[] numPad = new KeyCode[10];
     KeyCode[] digits = new KeyCode[10];
     private int selectedI = 0, selectedJ = 0;
     NumberStage numberStage = new NumberStage(this);
+
+    SudokuScene scene;
+
     public BigGridPane(SudokuScene scene) {
+        this.scene = scene;
         init();
         this.setPrefColumns(3);
         this.setPrefRows(3);
-        setVgap(-1);
-        setHgap(0);
+        setVgap(1);
+        setHgap(2);
         for(int i = 0; i < 9; ++i) {
             for(int j = 0; j < 9; ++j) {
-                button[i][j] = ControlUiUtil.getSudokuButton(" ");
+                SEButton button = ControlUiUtil.getSudokuButton(" ");
+                buttons[i][j] = button;
                 int finalI = i;
                 int finalJ = j;
-                button[i][j].setOnMouseClicked(mouseEvent -> {
+                buttons[i][j].setOnMouseClicked(mouseEvent -> {
                     select(finalI, finalJ);
                     if (unfilled[finalI][finalJ] == 0 && scene.isShowPopup()) {
                         numberStage.show(finalI, finalJ, mouseEvent.getScreenX(), mouseEvent.getScreenY());
@@ -48,7 +53,7 @@ public class BigGridPane extends STilePane {
                 y = j * 3;
                 for(int k = x; k < x + 3; ++k) {
                     for(int l = y; l < y + 3; ++l) {
-                        gridPane[i][j].getChildren().add(button[k][l]);
+                        gridPane[i][j].getChildren().add(buttons[k][l]);
                     }
                 }
                 getChildren().add(gridPane[i][j]);
@@ -66,11 +71,11 @@ public class BigGridPane extends STilePane {
                 sudoku[i][j] = num;
                 unfilled[i][j]  = num;
                 if(s[i][j] != 0) {
-                    button[i][j].disable();
-                    button[i][j].setText(num + "");
+                    buttons[i][j].disable();
+                    buttons[i][j].setText(String.valueOf(num));
                 } else {
-                    button[i][j].blank();
-                    button[i][j].setText(" ");
+                    buttons[i][j].blank();
+                    buttons[i][j].setText(" ");
                 }
             }
         }
@@ -81,7 +86,7 @@ public class BigGridPane extends STilePane {
         sudoku = new int[9][9];
         unfilled = new int[9][9];
         gridPane = new STilePane[3][3];
-        button = new SEButton[9][9];
+        buttons = new SEButton[9][9];
         numPad[0] = KeyCode.NUMPAD0;
         numPad[1] = KeyCode.NUMPAD1;
         numPad[2] = KeyCode.NUMPAD2;
@@ -115,7 +120,7 @@ public class BigGridPane extends STilePane {
             select(selectedI+1, selectedJ);
         }
         for(int i = 0; i < 10; ++i){
-            if((c.equals(digits[i]) || c.equals(numPad[i])) && !button[selectedI][selectedJ].isDisabled()) {
+            if((c.equals(digits[i]) || c.equals(numPad[i])) && !buttons[selectedI][selectedJ].isDisabled()) {
                 setValue(selectedI, selectedJ, i);
             }
         }
@@ -127,10 +132,10 @@ public class BigGridPane extends STilePane {
     public void setValue(int i, int j, int num) {
         if (unfilled[i][j] == 0) {
             if (num == 0) {
-                button[i][j].setText(" ");
+                buttons[i][j].setText(" ");
                 sudoku[i][j] = num;
             } else {
-                button[i][j].setText(num + "");
+                buttons[i][j].setText(String.valueOf(num));
 //                boolean correct = SudokuUtil.isEligible(num, sudoku, i, j);
                 sudoku[i][j] = num;
                 if (isSolved()) {
@@ -152,7 +157,7 @@ public class BigGridPane extends STilePane {
     }
 
     public void select(int i, int j) {
-        button[selectedI][selectedJ].normal();
+        buttons[selectedI][selectedJ].normal();
         selectedI = i;
         selectedJ = j;
         highlight(i, j);
@@ -160,26 +165,29 @@ public class BigGridPane extends STilePane {
 
     void highlight(int x, int y) {
         int num = sudoku[x][y];
+        if (num == 0) buttons[x][y].wrong(false);
         for(int i = 0; i < 9; ++i) {
             for (int j = 0; j < 9; ++j) {
                 if(sudoku[i][j] != 0) {
-                    button[i][j].wrong(sudoku[i][j] != answer[i][j]);
-                    if (!(i == x && j == y) && sudoku[i][j] == num) button[i][j].hint();
-                    else button[i][j].normal();
+                    buttons[i][j].wrong(sudoku[i][j] != answer[i][j]);
+                    if (!(i == x && j == y) && sudoku[i][j] == num) buttons[i][j].hint();
+                    else buttons[i][j].normal();
                 } else {
-                    button[i][j].normal();
+                    buttons[i][j].normal();
                 }
             }
         }
-        for (int i = 0; i < 9; ++i) if (i != y) button[x][i].hint();
-        for (int i = 0; i < 9; ++i) if (i != x) button[i][y].hint();
+        System.out.println(num);
+        scene.onSudokuUpdated();
+        for (int i = 0; i < 9; ++i) if (i != y) buttons[x][i].hint();
+        for (int i = 0; i < 9; ++i) if (i != x) buttons[i][y].hint();
         int xFrom = (x / 3) * 3;
         int yFrom = (y / 3) * 3;
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j) {
-                if (x != i+xFrom || j+yFrom != y) button[i+xFrom][j+yFrom].hint(); else button[i+xFrom][j+yFrom].normal();
+                if (x != i+xFrom || j+yFrom != y) buttons[i+xFrom][j+yFrom].hint(); else buttons[i+xFrom][j+yFrom].normal();
             }
-        button[x][y].select();
+        buttons[x][y].select();
     }
 
     @Override
