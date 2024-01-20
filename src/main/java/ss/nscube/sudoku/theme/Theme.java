@@ -60,10 +60,10 @@ public class Theme {
     static final String GREY_DD = "#DDDDDD";
     static final String GREY_AA = "#DDDDDD";
     static final String GREY_88 = "#888888";
-    static final String DARK_GREEN = "#1C2216";
+    static final String DARK_GREEN = "#29341C";
     static final String LIGHT_GREEN = "#CEE4B4";
-    static final String DARK_RED = "#531515";
-    static final String LIGHT_RED = "#DFA1A1";
+    static final String DARK_RED = "#710505";
+    static final String LIGHT_RED = "#EF9A9A";
 
     public static String fontFamily = "DejaVu Sans Mono";
     public static Font smallFont, bigFont;
@@ -122,9 +122,9 @@ public class Theme {
         eButtonStyle[1] = new Style(GREY_900, GREY_200, null, GREY_88, 1);
 
         //light theme
-        wrongEButtonStyle[0] = new Style(LIGHT_RED, GREY_700, null, RED_100, 1);
+        wrongEButtonStyle[0] = new Style(LIGHT_RED, GREY_700, null, GREY_88, 1);
         //dark theme
-        wrongEButtonStyle[1] = new Style(DARK_RED, GREY_400, null, RED_900, 1);
+        wrongEButtonStyle[1] = new Style(DARK_RED, GREY_400, null, GREY_88, 1);
 
         //light theme
         wrongSelectEButtonStyle[0] = new Style(LIGHT_RED, GREY_700, null, GREY_900, 2);
